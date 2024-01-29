@@ -27,5 +27,7 @@ class DatabaseSeeder extends Seeder
             'phone' => '0780734018',
             'password' => Hash::make('12345678'),
         ]);
+
+        $this->call([ItemSeeder::class]);
     }
 }
