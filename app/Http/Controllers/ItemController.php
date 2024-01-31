@@ -32,7 +32,7 @@ class ItemController extends Controller
                 'item_description' => $request->item_description,
                 'price' => $request->price,
                 'category' => 'sea food',
-                'image' => 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.target.com%2Fp%2Fextra-large-red-seedless-grapes-1-5lb-bag%2F-%2FA-15013626&psig=AOvVaw1NO4zgJz-A_M9kpvrADf3_&ust=1705154225631000&source=images&cd=vfe&opi=89978449&ved=0CBMQjRxqFwoTCIihpNGA2IMDFQAAAAAdAAAAABAQ'
+                'image' => 'https://zonefresh.com.au/wp-content/uploads/PEACHES-WHITE--600x600.jpg'
             ]);
             return redirect()->route('user.index')->with('success', 'product item created successfully');
         } catch (\Throwable $th) {

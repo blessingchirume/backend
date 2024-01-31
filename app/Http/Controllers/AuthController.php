@@ -94,4 +94,27 @@ class AuthController extends Controller
              return response()->json(['success' => null, 'error' => $th->getMessage()]);
          }
     }
+
+    public function register(Request $request)
+    {
+        $data = $request->validate([
+            'name' => 'required',
+            'surname' => 'required',
+            'email' => 'required',
+            'phone' => 'required'
+        ]);
+        try {
+            $user = new User();
+            $user->create([
+                'name' => $request->name,
+                'surname' => $request->surname,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'password' => Hash::make('12345678'),
+            ]);
+            return response(['success' => 'user created successfully', 'error' => null]);
+        } catch (\Throwable $th) {
+            return  response(['success' => null, 'error' => $th->getMessage()]);
+        }
+    }
 }
