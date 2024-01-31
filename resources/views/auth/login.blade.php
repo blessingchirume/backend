@@ -1,4 +1,4 @@
-{{--<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -44,8 +44,8 @@
                             </div>
                             <input name="login" id="login" class="btn btn-block login-btn" type="submit" value="{{ __('Login') }}">
                         </form>
-                        <a href="/users/create" class="forgot-password-link">Forgot password?</a>
-                        <p class="login-wrapper-footer-text">Don't have an account? <a href="#!" class="text-reset">Register here</a></p>
+                        <a href="#" class="forgot-password-link">Forgot password?</a>
+                        <p class="login-wrapper-footer-text">Don't have an account? <a href="/create" class="text-reset">Register here</a></p>
                     </div>
                 </div>
                 <div class="col-sm-6 px-0 d-none d-sm-block">
@@ -59,4 +59,4 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 </body>
 
-</html>--}}
+</html>

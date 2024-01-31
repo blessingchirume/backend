@@ -221,7 +221,6 @@ class PaymentController extends Controller
 
         # Send Payment
         $response = $this->makeSeamlessPayment($payment, 'Online Transaction', $request->paymentDetails["amount"], $requiredFields, '7442');
-        return $response;
         if ($response) {
             # Save the reference number and/or poll url (used to check the status of a transaction)
             $referenceNumber = $response->referenceNumber();

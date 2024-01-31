@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Item;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class ApplicationController extends Controller
 {
@@ -44,9 +46,11 @@ class ApplicationController extends Controller
         return response($orders);
     }
 
-    public function items() 
+    public function items()
     {
         $items = Item::all();
-        return response()->json(['success' => $items, 'error' => null ]);
+        return response()->json(['success' => $items, 'error' => null]);
     }
+
+
 }
