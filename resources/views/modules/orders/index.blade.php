@@ -31,28 +31,23 @@
                         <th>Delivery status</th>
                         <th>Delivery Date</th>
                         <th>Approval Status</th>
-                        <th>Customer</th>
-                        <th>Created</th>
-                        <th>Updated</th>
+                    
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($orders as $user)
+                    @foreach($orders as $order)
                     <tr>
-                        <td>{{$user->order_number}}</td>
-                        <td>{{$user->order_ref_number}}</td>
-                        <td>{{$user->payment_status}}</td>
-                        <td>{{$user->customer_delivery_status}}</td>
-                        <td>{{$user->admin_delivery_status}}</td>
-                        <td>{{$user->delivery_date}}</td>
-                        <td>{{$user->approval_status}}</td>
-                        <td>{{$user->user->name}} {{$user->user->surname}}</td>
-                        <td>{{$user->created_at}}</td>
-                        <td>{{$user->Updated_at}}</td>
+                        <td>{{$order->order_number}}</td>
+                        <td>{{$order->order_ref_number}}</td>
+                        <td><x-status :status="$order->payment_status"/></td>
+                        <td><x-status :status="$order->customer_delivery_status"/></td>
+                        <td><x-status :status="$order->admin_delivery_status"/></td>
+                        <td>{{$order->delivery_date}}</td>
+                        <td><x-status :status="$order->approval_status"/></td>                     
+
                         <td>
-                            <a href="">view</a>
-                            <a href="">pdf</a>
+                            <a href="{{ route('order.show', $order) }}">view</a>
                         </td>
                     </tr>
                     @endforeach

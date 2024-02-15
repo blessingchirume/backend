@@ -221,14 +221,17 @@ class PaymentController extends Controller
 
         # Send Payment
         $response = $this->makeSeamlessPayment($payment, 'Online Transaction', $request->paymentDetails["amount"], $requiredFields, '7442');
-        if ($response) {
+
+        if ($response["referenceNumber"]) {
             # Save the reference number and/or poll url (used to check the status of a transaction)
-            $referenceNumber = $response->referenceNumber();
-            $pollUrl = $response->pollUrl();
+            $referenceNumber = $response["referenceNumber"];
+            $pollUrl = $response["pollUrl"];
 
             $order = new Order();
 
             // return response($request);
+
+
 
             $order->create([
                 'order_number' => $request->orderDetails["order_number"],
@@ -244,7 +247,7 @@ class PaymentController extends Controller
 
 
             foreach ($request->orderDetails["order_items"] as $row) {
-                $order->items()->attach(Item::where('id', $row['item_id'])->first());
+                $order->items()->attach(Item::where('id', $row['id'])->first());
             }
         } else {
             #Get Error Message
@@ -279,12 +282,14 @@ class PaymentController extends Controller
         $jsonDecoded = json_decode($decryptedData, true);
 
         $referenceNumber = $jsonDecoded['referenceNumber'];
+        $transactionStatus = $jsonDecoded['transactionStatus'];
         $pollUrl = $jsonDecoded['pollUrl'];
         $paymentDate = date('Y-m-d HH:mm:ss');
-        $user_id = 1;
+        $user_id = Auth::user()->id;
         $type = $jsonDecoded['amountDetails']['currencyCode'];
         $order_number = '1000104';
         $amount = $jsonDecoded['amountDetails']['merchantAmount'];
+
 
         DB::table('payments')->insert([
             'user_id' => $user_id,
@@ -292,6 +297,7 @@ class PaymentController extends Controller
             'order_number' => $order_number,
             'ref_number' => $referenceNumber,
             'poll_url' => $pollUrl,
+            'status' => $transactionStatus,
             'payment_date' => $paymentDate,
             'amount' => $amount,
         ]);
@@ -455,5 +461,30 @@ class PaymentController extends Controller
     {
         $payments = DB::table('payments')->get();
         return view('modules.payments.index', compact('payments'));
+    }
+
+    public function pollTransaction($paymentId)
+    {
+
+        $payment = DB::table('payments')->where('id', $paymentId)->first();
+        $response = $this->initCurlRequest("GET", $payment->poll_url);
+
+        if ($response instanceof ErrorResponse)
+            return $response;
+
+        $decryptedData = $this->decrypt($response['payload']);
+
+        $jsonDecoded = json_decode($decryptedData, true);
+        $referenceNumber = $jsonDecoded['referenceNumber'];
+        $pollUrl = $jsonDecoded['pollUrl'];
+        $paid = $jsonDecoded['transactionStatus'] == 'SUCCESS';
+
+        DB::table('payments')->where('id', $paymentId)->update([
+            'status' => $jsonDecoded['transactionStatus'],
+        ]);
+
+        return redirect()->route('payment.index');
+
+        // return new Response($referenceNumber, $pollUrl, null, $paid);
     }
 }

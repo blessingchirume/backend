@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('amount');
             $table->string('ref_number');
             $table->string('poll_url');
+            $table->string('status');
             $table->string('payment_date');
             $table->timestamps();
         });

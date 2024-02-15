@@ -43,8 +43,7 @@
                         <td>{{$user->created_at}}</td>
                         <td>{{$user->updated_at}}</td>
                         <td>
-                            <a href="">view</a>
-                            <a href="">pdf</a>
+                            <a href="{{ route('user.show', $user) }}">view</a>
                         </td>
                     </tr>
                     @endforeach

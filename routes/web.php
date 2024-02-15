@@ -40,6 +40,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::prefix('users')->group(function () {
         Route::get('/', [UserController::class, 'index'])->name('user.index');
         Route::post('/', [UserController::class, 'store'])->name('user.store');
+        Route::get('/{user}', [UserController::class, 'show'])->name('user.show');
+        Route::post('/update/{user}', [UserController::class, 'update'])->name('user.update');
+        Route::post('/delete/{user}', [UserController::class, 'destroy'])->name('user.delete');
     });
 
     Route::prefix('items')->group(function () {
@@ -50,12 +53,19 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::prefix('order')->group(function () {
         Route::get('/', [OrderController::class, 'index'])->name('order.index');
+        Route::get('/{order}', [OrderController::class, 'show'])->name('order.show');
         Route::get('/create', [OrderController::class, 'create'])->name('order.create');
         Route::post('/', [OrderController::class, 'store'])->name('order.store');
+        Route::post('/update/{order}', [OrderController::class, 'update'])->name('order.update');
+        Route::post('/delete/{order}', [OrderController::class, 'destroy'])->name('order.delete');
+
     });
 
     Route::prefix('payment')->group(function () {
         Route::get('/', [PaymentController::class, 'index'])->name('payment.index');
+        Route::get('/poll/{payment}', [PaymentController::class, 'pollTransaction'])->name('payment.poll');
+        Route::post('/', [PaymentController::class, 'index'])->name('payment.update');
+        Route::post('/', [PaymentController::class, 'index'])->name('payment.delete');
     });
 
     Route::get('/home', [App\Http\Controllers\OrderController::class, 'index'])->name('home');

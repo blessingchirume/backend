@@ -41,15 +41,36 @@ class ApplicationController extends Controller
 
     public function orders()
     {
-        $orders = Order::with('items')->get();
-
-        return response($orders);
+        return response(Auth::user()->orders);
     }
 
     public function items()
     {
         $items = Item::all();
         return response()->json(['success' => $items, 'error' => null]);
+    }
+
+    public function register(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'surname' => 'required',
+            'email' => 'required',
+            'phone' => 'required'
+        ]);
+        try {
+            $user = new User();
+            $user->create([
+                'name' => $request->name,
+                'surname' => $request->surname,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'password' => Hash::make('12345678'),
+            ]);
+            return response(['success' => 'user created successfully', 'error' => null]);
+        } catch (\Throwable $th) {
+            return  response(['success' => null, 'error' => $th->getMessage()]);
+        }
     }
 
 
