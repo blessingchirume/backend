@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-light">
+<nav class="navbar navbar-expand-sm bg-light">
     <div class="container">
         <a class="navbar-brand" href="#">
             {{--<img src="https://corepay.co.zw/wp-content/uploads/2023/08/cropped-Email-Logo-300x85.png" width="auto" height="45">--}}
