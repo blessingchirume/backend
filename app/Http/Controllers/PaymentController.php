@@ -209,7 +209,7 @@ class PaymentController extends Controller
 
     public function seamlessPayment(Request $request)
     {
-        return $request;
+        // return $request;
         # Create the payment
         $payment = $this->createPayment('USD', 'PZW211', $request->paymentDetails["email"], $request->paymentDetails["phoneNumber"], $request->paymentDetails["name"]);
 
@@ -220,10 +220,12 @@ class PaymentController extends Controller
             'optional' => false
         ];
 
-        // return $payment;
+        // return response()->json($payment);
 
         # Send Payment
         $response = $this->makeSeamlessPayment($payment, 'Online Transaction', $request->paymentDetails["amount"], $requiredFields, '7442');
+
+        // return response()->json($response);
 
         if ($response["referenceNumber"]) {
             # Save the reference number and/or poll url (used to check the status of a transaction)
@@ -232,9 +234,7 @@ class PaymentController extends Controller
 
             $order = new Order();
 
-            // return response($request);
-
-
+            // return response($response["referenceNumber"]);
 
             $order->create([
                 'order_number' => $request->orderDetails["order_number"],
