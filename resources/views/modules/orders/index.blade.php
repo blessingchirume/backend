@@ -31,7 +31,7 @@
                         <th>Delivery status</th>
                         <th>Delivery Date</th>
                         <th>Approval Status</th>
-                    
+                        <th>Shipping Address</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -44,8 +44,8 @@
                         <td><x-status :status="$order->customer_delivery_status"/></td>
                         <td><x-status :status="$order->admin_delivery_status"/></td>
                         <td>{{$order->delivery_date}}</td>
-                        <td><x-status :status="$order->approval_status"/></td>                     
-
+                        <td><x-status :status="$order->approval_status"/></td>  
+                        <td>{{ $order->shipping_address }}</td>                     
                         <td>
                             <a href="{{ route('order.show', $order) }}">view</a>
                         </td>
