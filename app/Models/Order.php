@@ -17,7 +17,8 @@ class Order extends Model
         'customer_delivery_status',
         'payment_status',
         'order_ref_number',
-        'order_number'
+        'order_number',
+        'shipping_address'
     ];
 
     public function items () {

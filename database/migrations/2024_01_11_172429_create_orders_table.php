@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('admin_delivery_status');
             $table->string('delivery_date');
             $table->string('approval_status');
+            $table->longText('shipping_address');
             $table->string('user_id');
             $table->timestamps();
         });

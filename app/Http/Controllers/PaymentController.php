@@ -225,7 +225,7 @@ class PaymentController extends Controller
         # Send Payment
         $response = $this->makeSeamlessPayment($payment, 'Online Transaction', $request->paymentDetails["amount"], $requiredFields, '7442');
 
-        // return response()->json($response);
+        return response()->json($response);
 
         if ($response["referenceNumber"]) {
             # Save the reference number and/or poll url (used to check the status of a transaction)
@@ -234,28 +234,32 @@ class PaymentController extends Controller
 
             $order = new Order();
 
-            // return response($response["referenceNumber"]);
+            try {
+                $order->create([
+                    'order_number' => rand(11111111, 99999999),
+                    'order_ref_number' => $request->orderDetails["order_ref_number"],
+                    'payment_status' => 0,
+                    'customer_delivery_status' => 0,
+                    'admin_delivery_status' => 0,
+                    'delivery_date' => date('Y-m-d'),
+                    'approval_status' => 0,
+                    'user_id' => Auth::user()->id,
+                    'shipping_address' => $request->shipping_address
 
-            $order->create([
-                'order_number' => $request->orderDetails["order_number"],
-                'order_ref_number' => $request->orderDetails["order_ref_number"],
-                'payment_status' => $request->orderDetails["payment_status"],
-                'customer_delivery_status' => $request->orderDetails["customer_delivery_status"],
-                'admin_delivery_status' => $request->orderDetails["admin_delivery_status"],
-                'delivery_date' => $request->orderDetails["delivery_date"],
-                'approval_status' => $request->orderDetails["approval_status"],
-                'user_id' => Auth::user()->id
+                ]);
 
-            ]);
+                foreach ($request->orderDetails["order_items"] as $row) {
+                    $order->items()->attach(Item::where('id', $row['id'])->first());
+                }
 
-
-            foreach ($request->orderDetails["order_items"] as $row) {
-                $order->items()->attach(Item::where('id', $row['id'])->first());
+                return response('Your order has been submitted successfully', 200);
+            } catch (\Throwable $th) {
+                return response($th->getMessage(), 500);
             }
         } else {
             #Get Error Message
             $errorMessage = $response->message();
-            return response($errorMessage);
+            return response($errorMessage, 500);
         }
     }
 
