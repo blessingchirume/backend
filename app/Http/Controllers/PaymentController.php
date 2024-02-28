@@ -242,8 +242,7 @@ class PaymentController extends Controller
                     'delivery_date' => date('Y-m-d'),
                     'approval_status' => 0,
                     'user_id' => Auth::user()->id,
-                    'shipping_address' => $request->shipping_address
-
+                    'shipping_address' => $request->orderDetails["shipping_address"]
                 ]);
 
                 foreach ($request->orderDetails["order_items"] as $row) {
