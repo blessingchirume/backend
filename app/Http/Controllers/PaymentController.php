@@ -209,7 +209,7 @@ class PaymentController extends Controller
 
     public function seamlessPayment(Request $request)
     {
-        // return $request;
+        return $request;
         # Create the payment
         $payment = $this->createPayment('USD', 'PZW211', $request->paymentDetails["email"], $request->paymentDetails["phoneNumber"], $request->paymentDetails["name"]);
 

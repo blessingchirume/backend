@@ -28,7 +28,7 @@ Route::get('/', function () {
 Route::get('/create', [UserController::class, 'create'])->name('user.create');
 
 Route::group(['middleware' => 'auth'], function () {
-    
+
     Route::get('/make-payment', [PaymentController::class, 'seamlessPayment'])->name('make-payment');
 
     Route::get('/payment/result', [PaymentController::class, 'payment_result'])->name('payment-result');
@@ -58,7 +58,6 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/', [OrderController::class, 'store'])->name('order.store');
         Route::post('/update/{order}', [OrderController::class, 'update'])->name('order.update');
         Route::post('/delete/{order}', [OrderController::class, 'destroy'])->name('order.delete');
-
     });
 
     Route::prefix('payment')->group(function () {
@@ -68,9 +67,11 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/', [PaymentController::class, 'index'])->name('payment.delete');
     });
 
-    Route::get('/home', [App\Http\Controllers\OrderController::class, 'index'])->name('home');
+    Route::get('/privacy', function () {
+        return view('modules.privacy');
+    });
 
+    Route::get('/home', [App\Http\Controllers\OrderController::class, 'index'])->name('home');
 });
 
 Auth::routes();
-
