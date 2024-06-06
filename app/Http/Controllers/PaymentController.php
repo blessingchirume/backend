@@ -30,7 +30,7 @@ class PaymentController extends Controller
     /**
      * Make Seamless payment API Endpoint
      */
-    const MAKE_SEAMLESS_PAYMENT_URL = self::BASE_URL . '/v2/payments/make-payment';
+    const MAKE_SEAMLESS_PAYMENT_URL = self::BASE_URL . '/v1/payments/make-payment';
 
     /**
      * Initiate payment API Endpoint
@@ -209,7 +209,7 @@ class PaymentController extends Controller
 
     public function seamlessPayment(Request $request)
     {
-        return $request;
+        // return $request;
         # Create the payment
         $payment = $this->createPayment('USD', 'PZW211', $request->paymentDetails["email"], $request->paymentDetails["phoneNumber"], $request->paymentDetails["name"]);
 
@@ -224,6 +224,8 @@ class PaymentController extends Controller
 
         # Send Payment
         $response = $this->makeSeamlessPayment($payment, 'Online Transaction', $request->paymentDetails["amount"], $requiredFields, '7442');
+
+        return $response;
 
         if ($response["referenceNumber"]) {
             # Save the reference number and/or poll url (used to check the status of a transaction)
@@ -272,12 +274,16 @@ class PaymentController extends Controller
 
         $payment->setRequiredFields($requiredFields);
 
+        return $payment;
+
         $encryptedData = $this->encrypt(json_encode($payment));
 
         $payload = json_encode(['payload' => $encryptedData]);
 
-        $response = $this->initCurlRequest("POST", self::MAKE_SEAMLESS_PAYMENT_URL, $payload);
+        return $payload;
 
+        $response = $this->initCurlRequest("POST", self::MAKE_SEAMLESS_PAYMENT_URL, $payload);
+        return json_encode($response);
         if ($response instanceof ErrorResponse)
             return $response;
 
