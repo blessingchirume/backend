@@ -104,6 +104,7 @@ class AuthController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8'],
         ]);
+        $data['password'] = Hash::make($request->password);
         try {
            User::create($data);
            return response()->json(['success' => 'user has been created!', 'error' => null]);
