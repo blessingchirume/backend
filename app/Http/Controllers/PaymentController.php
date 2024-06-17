@@ -272,18 +272,26 @@ class PaymentController extends Controller
         $payment->reasonForPayment = $reasonForPayment;
         $payment->amountDetails = new Amount($amount, $payment->currencyCode);
 
-        $payment->setRequiredFields($requiredFields);
+        $paymentDetails = [
+            'amountDetails'=> [
+                'amount'=> 10,
+                'currencyCode'=> $payment->currencyCode
+            ],
+            'merchantReference'=>   floor(rand(0, 10000)), // this has to be unique for each transaction 
+            'reasonForPayment'=> "Waterworks credits purchase",
+            'resultUrl'=> $this->resultUrl,
+            'returnUrl'=> $this->returnUrl,
+            'paymentMethodCode'=>  $payment->paymentMethodCode,
+            'customer'=> $payment->customer,
+            'paymentMethodRequiredFields'=> $payment->requiredFields
+        ];
 
-        return $payment;
-
-        $encryptedData = $this->encrypt(json_encode($payment));
+        $encryptedData = $this->encrypt(json_encode($paymentDetails));
 
         $payload = json_encode(['payload' => $encryptedData]);
 
-        return $payload;
-
         $response = $this->initCurlRequest("POST", self::MAKE_SEAMLESS_PAYMENT_URL, $payload);
-        return json_encode($response);
+
         if ($response instanceof ErrorResponse)
             return $response;
 
@@ -292,14 +300,18 @@ class PaymentController extends Controller
         $jsonDecoded = json_decode($decryptedData, true);
 
         $referenceNumber = $jsonDecoded['referenceNumber'];
-        $transactionStatus = $jsonDecoded['transactionStatus'];
-        $pollUrl = $jsonDecoded['pollUrl'];
-        $paymentDate = date('Y-m-d HH:mm:ss');
-        $user_id = Auth::user()->id;
-        $type = $jsonDecoded['amountDetails']['currencyCode'];
-        $order_number = '1000104';
-        $amount = $jsonDecoded['amountDetails']['merchantAmount'];
 
+        $pollUrl = $jsonDecoded['pollUrl'];
+
+        $paymentDate = date('Y-m-d HH:mm:ss');
+
+        $user_id = Auth::user()->id;
+
+        $type = $jsonDecoded['amountDetails']['currencyCode'];
+
+        $order_number = '1000104';
+
+        $amount = $jsonDecoded['amountDetails']['merchantAmount'];
 
         DB::table('payments')->insert([
             'user_id' => $user_id,
@@ -307,7 +319,6 @@ class PaymentController extends Controller
             'order_number' => $order_number,
             'ref_number' => $referenceNumber,
             'poll_url' => $pollUrl,
-            'status' => $transactionStatus,
             'payment_date' => $paymentDate,
             'amount' => $amount,
         ]);
