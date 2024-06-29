@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use phpseclib3\File\ASN1\Maps\EncryptedData;
 
 class PaymentController extends Controller
 {
@@ -30,7 +31,7 @@ class PaymentController extends Controller
     /**
      * Make Seamless payment API Endpoint
      */
-    const MAKE_SEAMLESS_PAYMENT_URL = self::BASE_URL . '/v1/payments/make-payment';
+    const MAKE_SEAMLESS_PAYMENT_URL = self::BASE_URL . '/v2/payments/make-payment';
 
     /**
      * Initiate payment API Endpoint
@@ -209,56 +210,40 @@ class PaymentController extends Controller
 
     public function seamlessPayment(Request $request)
     {
-        // return $request;
         # Create the payment
         $payment = $this->createPayment('USD', 'PZW211', $request->paymentDetails["email"], $request->paymentDetails["phoneNumber"], $request->paymentDetails["name"]);
-
+        // return json_encode($payment);
         $requiredFields = [
-            'fieldType' => 'TEXT',
             'customerPhoneNumber' => $request->paymentDetails["phoneNumber"],
-            'displayName' => $request->paymentDetails["phoneNumber"],
-            'optional' => false
         ];
-
-        // return response()->json($payment);
 
         # Send Payment
         $response = $this->makeSeamlessPayment($payment, 'Online Transaction', $request->paymentDetails["amount"], $requiredFields, '7442');
-
         return $response;
-
-        if ($response["referenceNumber"]) {
-            # Save the reference number and/or poll url (used to check the status of a transaction)
-            $referenceNumber = $response["referenceNumber"];
-            $pollUrl = $response["pollUrl"];
+        if ($response) {
 
             $order = new Order();
 
-            try {
-                $order->create([
-                    'order_number' => rand(11111111, 99999999),
-                    'order_ref_number' => $request->orderDetails["order_ref_number"],
-                    'payment_status' => 0,
-                    'customer_delivery_status' => 0,
-                    'admin_delivery_status' => 0,
-                    'delivery_date' => date('Y-m-d'),
-                    'approval_status' => 0,
-                    'user_id' => Auth::user()->id,
-                    'shipping_address' => $request->orderDetails["shipping_address"]
-                ]);
+            $order->create([
+                'order_number' => $request->orderDetails["order_number"],
+                'order_ref_number' => $request->orderDetails["order_ref_number"],
+                'payment_status' => $request->orderDetails["payment_status"],
+                'customer_delivery_status' => $request->orderDetails["customer_delivery_status"],
+                'admin_delivery_status' => $request->orderDetails["admin_delivery_status"],
+                'delivery_date' => $request->orderDetails["delivery_date"],
+                'approval_status' => $request->orderDetails["approval_status"],
+                'user_id' => Auth::user()->id
 
-                foreach ($request->orderDetails["order_items"] as $row) {
-                    $order->items()->attach(Item::where('id', $row['id'])->first());
-                }
+            ]);
 
-                return response('Your order has been submitted successfully', 200);
-            } catch (\Throwable $th) {
-                return response($th->getMessage(), 500);
+
+            foreach ($request->orderDetails["order_items"] as $row) {
+                $order->items()->attach(Item::where('id', $row['item_id'])->first());
             }
         } else {
             #Get Error Message
             $errorMessage = $response->message();
-            return response($errorMessage, 500);
+            return response($errorMessage);
         }
     }
 
@@ -271,7 +256,7 @@ class PaymentController extends Controller
         $payment->returnUrl = $this->returnUrl;
         $payment->reasonForPayment = $reasonForPayment;
         $payment->amountDetails = new Amount($amount, $payment->currencyCode);
-
+        $payment->setRequiredFields($requiredFields);
         $paymentDetails = [
             'amountDetails'=> [
                 'amount'=> 10,
@@ -283,7 +268,7 @@ class PaymentController extends Controller
             'returnUrl'=> $this->returnUrl,
             'paymentMethodCode'=>  $payment->paymentMethodCode,
             'customer'=> $payment->customer,
-            'paymentMethodRequiredFields'=> $payment->requiredFields
+            'paymentMethodRequiredFields'=> $requiredFields
         ];
 
         $encryptedData = $this->encrypt(json_encode($paymentDetails));
@@ -321,6 +306,7 @@ class PaymentController extends Controller
             'poll_url' => $pollUrl,
             'payment_date' => $paymentDate,
             'amount' => $amount,
+            'status' => ''
         ]);
 
         return $jsonDecoded;
