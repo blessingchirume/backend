@@ -224,14 +224,14 @@ class PaymentController extends Controller
                 $orderTotal = 0.0;
                 $itemIds = [];
 
-                // foreach ($request->orderDetails["order_items"] as $row) {
-                //     array_push($itemIds, $row['id']);
+                foreach ($request->orderDetails["order_items"] as $row) {
+                    array_push($itemIds, $row['id']);
 
-                //     $item = Item::where('item_code', $row['itemNo'])->first();
-                //     $orderTotal += ($item->price * $row['quantity']);
-                // }
+                    $item = Item::where('item_code', $row['item_no'])->first();
+                    $orderTotal += ($item->price * $row['quantity']);
+                }
 
-                return $request->orderDetails["order_items"];
+                // return $request->orderDetails["order_items"];
 
                 $orderId = DB::table('orders')->insertGetId([
                     'shipping_address' => $request->orderDetails["shipping_address"],
