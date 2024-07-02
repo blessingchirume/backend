@@ -231,6 +231,8 @@ class PaymentController extends Controller
                     $orderTotal += ($item->price * $row['quantity']);
                 }
 
+                return $request->orderDetails["order_items"];
+
                 $orderId = DB::table('orders')->insertGetId([
                     'shipping_address' => $request->orderDetails["shipping_address"],
                     'order_number' => '$request->orderDetails["order_number"]',
