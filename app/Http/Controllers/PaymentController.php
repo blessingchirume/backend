@@ -227,19 +227,19 @@ class PaymentController extends Controller
                 foreach ($request->orderDetails["order_items"] as $row) {
                     array_push($itemIds, $row['id']);
 
-                    $item = Item::find($row['id']);
+                    $item = Item::where('item_code', $row['itemNo'])->first();
                     $orderTotal += ($item->price * $row['quantity']);
                 }
 
                 $orderId = DB::table('orders')->insertGetId([
                     'shipping_address' => $request->orderDetails["shipping_address"],
-                    'order_number' => $request->orderDetails["order_number"],
+                    'order_number' => '$request->orderDetails["order_number"]',
                     'order_ref_number' => $request->orderDetails["order_ref_number"],
-                    'payment_status' => $request->orderDetails["payment_status"],
-                    'customer_delivery_status' => $request->orderDetails["customer_delivery_status"],
-                    'admin_delivery_status' => $request->orderDetails["admin_delivery_status"],
-                    'delivery_date' => $request->orderDetails["delivery_date"],
-                    'approval_status' => $request->orderDetails["approval_status"],
+                    'payment_status' => 0,
+                    'customer_delivery_status' => 0,
+                    'admin_delivery_status' => 0,
+                    'delivery_date' => date('Y-m-d'),
+                    'approval_status' => 1,
                     'user_id' => Auth::user()->id,
                     'total' => $orderTotal
 

@@ -18,8 +18,11 @@ return new class extends Migration
             $table->string('order_number');
             $table->string('order_ref_number');
             $table->string('payment_status');
+            $table->string('payment_date')->default(date('Y-m-d'));
             $table->string('customer_delivery_status');
+            $table->string('dispatch_date')->default(date('Y-m-d'));
             $table->string('admin_delivery_status');
+            $table->string('expected_delivery_date')->default(date('Y-m-d'));
             $table->string('delivery_date');
             $table->string('approval_status');
             $table->longText('shipping_address');
