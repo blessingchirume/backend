@@ -219,26 +219,37 @@ class PaymentController extends Controller
 
         # Send Payment
         $response = $this->makeSeamlessPayment($payment, 'Online Transaction', $request->paymentDetails["amount"], $requiredFields, '7442');
-        return $response;
         if ($response) {
+            try {
+                $orderTotal = 0.0;
+                $itemIds = [];
 
-            $order = new Order();
+                foreach ($request->orderDetails["order_items"] as $row) {
+                    array_push($itemIds, $row['id']);
 
-            $order->create([
-                'order_number' => $request->orderDetails["order_number"],
-                'order_ref_number' => $request->orderDetails["order_ref_number"],
-                'payment_status' => $request->orderDetails["payment_status"],
-                'customer_delivery_status' => $request->orderDetails["customer_delivery_status"],
-                'admin_delivery_status' => $request->orderDetails["admin_delivery_status"],
-                'delivery_date' => $request->orderDetails["delivery_date"],
-                'approval_status' => $request->orderDetails["approval_status"],
-                'user_id' => Auth::user()->id
+                    $item = Item::find($row['id']);
+                    $orderTotal += ($item->price * $row['quantity']);
+                }
 
-            ]);
+                $orderId = DB::table('orders')->insertGetId([
+                    'shipping_address' => $request->orderDetails["shipping_address"],
+                    'order_number' => $request->orderDetails["order_number"],
+                    'order_ref_number' => $request->orderDetails["order_ref_number"],
+                    'payment_status' => $request->orderDetails["payment_status"],
+                    'customer_delivery_status' => $request->orderDetails["customer_delivery_status"],
+                    'admin_delivery_status' => $request->orderDetails["admin_delivery_status"],
+                    'delivery_date' => $request->orderDetails["delivery_date"],
+                    'approval_status' => $request->orderDetails["approval_status"],
+                    'user_id' => Auth::user()->id,
+                    'total' => $orderTotal
 
+                ]);
 
-            foreach ($request->orderDetails["order_items"] as $row) {
-                $order->items()->attach(Item::where('id', $row['item_id'])->first());
+                $order = Order::find($orderId);
+                $order->items()->attach($itemIds);
+                return response("Created", 201);
+            } catch (\Throwable $th) {
+                return $th->getMessage();
             }
         } else {
             #Get Error Message
@@ -258,17 +269,17 @@ class PaymentController extends Controller
         $payment->amountDetails = new Amount($amount, $payment->currencyCode);
         $payment->setRequiredFields($requiredFields);
         $paymentDetails = [
-            'amountDetails'=> [
-                'amount'=> 10,
-                'currencyCode'=> $payment->currencyCode
+            'amountDetails' => [
+                'amount' => 10,
+                'currencyCode' => $payment->currencyCode
             ],
-            'merchantReference'=>   floor(rand(0, 10000)), // this has to be unique for each transaction 
-            'reasonForPayment'=> "Waterworks credits purchase",
-            'resultUrl'=> $this->resultUrl,
-            'returnUrl'=> $this->returnUrl,
-            'paymentMethodCode'=>  $payment->paymentMethodCode,
-            'customer'=> $payment->customer,
-            'paymentMethodRequiredFields'=> $requiredFields
+            'merchantReference' =>   floor(rand(0, 10000)), // this has to be unique for each transaction 
+            'reasonForPayment' => "Waterworks credits purchase",
+            'resultUrl' => $this->resultUrl,
+            'returnUrl' => $this->returnUrl,
+            'paymentMethodCode' =>  $payment->paymentMethodCode,
+            'customer' => $payment->customer,
+            'paymentMethodRequiredFields' => $requiredFields
         ];
 
         $encryptedData = $this->encrypt(json_encode($paymentDetails));

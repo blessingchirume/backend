@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('order_items', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('item_id')->unsigned()->nullable();
-            $table->bigInteger('order_id')->unsigned()->nullable();
+            $table->bigInteger('item_id')->unsigned();
+            $table->bigInteger('order_id')->unsigned();
 
-            $table->foreign('item_id')->references('id')->on('items')->onDelete('set null');
-            $table->foreign('order_id')->references('id')->on('orders')->onDelete('set null');
+            $table->foreign('item_id')->references('id')->on('items')->onDelete('cascade');
+            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
 
             $table->timestamps();
         });

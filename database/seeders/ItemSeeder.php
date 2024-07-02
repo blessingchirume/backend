@@ -18,17 +18,17 @@ class ItemSeeder extends Seeder
         Item::create([
             'item_code' => rand(000000, 999999),
             'item_description' => '1kg premium peaches',
-            'price' => '5.40',
+            'price' => '0.30',
             'category' => 'Fruits and vegetables',
-            'image' => 'https://zonefresh.com.au/wp-content/uploads/PEACHES-WHITE--600x600.jpg'
+            'image' => 'https://api.slingacademy.com/public/sample-photos/1.jpeg'
         ]);
 
         Item::create([
             'item_code' => rand(000000, 999999),
             'item_description' => '6 pack standard grape ',
-            'price' => '5.40',
+            'price' => '0.20',
             'category' => 'Fruits and vegetables',
-            'image' => 'https://www.westfaliafruit.com/wp-content/uploads/2019/01/Table-Grapes-300x300.jpg'
+            'image' => 'https://api.slingacademy.com/public/sample-photos/1.jpeg'
         ]);
     }
 }

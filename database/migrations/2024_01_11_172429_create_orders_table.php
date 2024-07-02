@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('approval_status');
             $table->longText('shipping_address');
             $table->string('user_id');
+            $table->double('total')->default(0.0);
             $table->timestamps();
         });
     }

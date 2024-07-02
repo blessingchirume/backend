@@ -41,7 +41,31 @@ class ApplicationController extends Controller
 
     public function orders()
     {
-        return response(Auth::user()->orders);
+        return response(Auth::user()->orders->load('items')->map(function ($order) {
+            return [
+                "id" => $order->id,
+                "order_number" => $order->order_number,
+                "order_ref_number" => $order->order_ref_number,
+                "payment_status" => $order->payment_status,
+                "customer_delivery_status" => $order->customer_delivery_status,
+                "admin_delivery_status" => $order->admin_delivery_status,
+                "delivery_date" => $order->delivery_date,
+                "approval_status" => $order->approval_status,
+                "shipping_address" => $order->shipping_address,
+                "user_id" => $order->user_id,
+                "total" => $order->total,
+                "items" => $order->items->map(function ($item) {
+                    return [
+                        "id" => $item->id,
+                        "item_code" => $item->item_code,
+                        "item_description" => $item->item_description,
+                        "category" => $item->category,
+                        "image" => $item->image,
+                        "price" => $item->price,
+                    ];
+                })
+            ];
+        }));
     }
 
     public function items()
@@ -72,6 +96,4 @@ class ApplicationController extends Controller
             return  response(['success' => null, 'error' => $th->getMessage()]);
         }
     }
-
-
 }
