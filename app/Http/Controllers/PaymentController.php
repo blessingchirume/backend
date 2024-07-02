@@ -235,7 +235,7 @@ class PaymentController extends Controller
 
                 $orderId = DB::table('orders')->insertGetId([
                     'shipping_address' => $request->orderDetails["shipping_address"],
-                    'order_number' => '$request->orderDetails["order_number"]',
+                    'order_number' => 100010007,
                     'order_ref_number' => $request->orderDetails["order_ref_number"],
                     'payment_status' => 0,
                     'customer_delivery_status' => 0,
