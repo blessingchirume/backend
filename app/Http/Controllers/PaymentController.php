@@ -227,7 +227,7 @@ class PaymentController extends Controller
                 foreach ($request->orderDetails["order_items"] as $row) {
                     array_push($itemIds, $row['id']);
 
-                    $item = Item::where('item_code', $row['item_no'])->first();
+                    $item = Item::where('item_code', $row['itemNo'])->first();
                     $orderTotal += ($item->price * $row['quantity']);
                 }
 
@@ -272,7 +272,7 @@ class PaymentController extends Controller
         $payment->setRequiredFields($requiredFields);
         $paymentDetails = [
             'amountDetails' => [
-                'amount' => 10,
+                'amount' => $amount,
                 'currencyCode' => $payment->currencyCode
             ],
             'merchantReference' =>   floor(rand(0, 10000)), // this has to be unique for each transaction 

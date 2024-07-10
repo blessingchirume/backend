@@ -96,4 +96,34 @@ class ApplicationController extends Controller
             return  response(['success' => null, 'error' => $th->getMessage()]);
         }
     }
+
+    public function confirmDelivery(Request $request)
+    {
+        $id = $request->validate([
+            'id' => 'required',
+        ]);
+
+        $order = Order::find($id)->first();
+
+
+        if ($order->payment_status == 0 || $order->admin_delivery_status == 0) {
+            return response("Failure: Some operations have not yet been mate, please contact support");
+        }
+
+        if ($order->customer_delivery_status == 1) {
+            return response("Failure: Delivery already confirmed");
+        }
+
+        try {
+            $order->update([
+                'customer_delivery_status' => 1,
+                "delivery_date" => date('Y-m-d')
+            ]);
+
+            return response('Delivery confirmed', 201);
+
+        } catch (\Throwable $th) {
+            return response($th->getMessage(), 500);
+        }
+    }
 }
