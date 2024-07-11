@@ -225,10 +225,11 @@ class PaymentController extends Controller
                 $itemIds = [];
 
                 foreach ($request->orderDetails["order_items"] as $row) {
-                    array_push($itemIds, $row['id']);
+                   
 
                     $item = Item::where('item_code', $row['item_no'])->first();
                     $orderTotal += ($item->price * $row['quantity']);
+                    array_push($itemIds, $item->id);
                 }
 
                 // return $request->orderDetails["order_items"];
