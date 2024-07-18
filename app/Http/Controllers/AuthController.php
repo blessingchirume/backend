@@ -55,7 +55,7 @@ class AuthController extends Controller
         $user = User::where('email', Auth::user()->email)->first();
         $token = 'Bearer ' . $user->createToken('maxycare')->accessToken;
 
-        return response()->json(["success" => $token, "error" => null]);
+        return response()->json(["success" => ["userData" => $user, "token" => $token], "error" => null]);
     }
 
     public function profile()
