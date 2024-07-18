@@ -22,7 +22,19 @@ Route::post('/login', [AuthController::class, 'authenticate']);
 
 Route::post('/register', [AuthController::class, 'register']);
 
+Route::post('/forgot-password', [AuthController::class, 'passwordReset']);
+
+
 Route::group(['middleware' => 'auth:api'], function(){
+
+    Route::prefix('/account')->group(function(){
+
+        Route::patch('/update', [AuthController::class, 'update']);
+
+        Route::patch('/delete', [AuthController::class, 'delete']);
+
+    });
+
     Route::post('/confirm-delivery', [ApplicationController::class, 'confirmDelivery']);
 
     Route::get('/products', [ApplicationController::class, 'items']);

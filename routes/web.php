@@ -24,10 +24,9 @@ Route::get('/', function () {
     return redirect()->route('login');
 });
 
-
 Route::get('/create', [UserController::class, 'create'])->name('user.create');
 
-Route::group(['middleware' => 'auth'], function () {
+Route::group(['middleware' => 'auth', ], function () {
 
     Route::get('/make-payment', [PaymentController::class, 'seamlessPayment'])->name('make-payment');
 
@@ -74,4 +73,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/home', [App\Http\Controllers\OrderController::class, 'index'])->name('home');
 });
 
-Auth::routes();
+Auth::routes([
+    'verify' => true
+]);
