@@ -1,9 +1,7 @@
-<nav class="navbar navbar-expand-sm bg-light">
+<nav class="navbar navbar-expand-sm bg-dark">
     <div class="container">
         <a class="navbar-brand" href="#">
-            {{--<img src="https://corepay.co.zw/wp-content/uploads/2023/08/cropped-Email-Logo-300x85.png" width="auto" height="45">--}}
-            <img src="{{ asset('/images/logo.svg') }}" width="auto" height="45">
-
+            <img src="{{ asset('images/logo/logo_trans.png') }}" width="auto" height="45">
         </a>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">

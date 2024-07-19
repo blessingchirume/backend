@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.8.95/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ asset('/urbanui/assets/css/login.css') }}">
+    <link rel="shortcut icon" href="{{ asset('images/logo/icon_trans.png') }}">
+
 </head>
 
 <body>
@@ -18,7 +20,7 @@
             <div class="row">
                 <div class="col-sm-6 login-section-wrapper">
                     <div class="brand-wrapper">
-                        <img src="{{ asset('/images/logo.svg') }}" alt="logo" class="logo">
+                        <img src="{{ asset('/images/logo/logo_trans.png') }}" alt="logo" class="logo">
                     </div>
                     <div class="login-wrapper my-auto">
                         <h1 class="login-title">Log in</h1>
@@ -44,8 +46,7 @@
                             </div>
                             <input name="login" id="login" class="btn btn-block login-btn" type="submit" value="{{ __('Login') }}">
                         </form>
-                        <a href="#" class="forgot-password-link">Forgot password?</a>
-                        <p class="login-wrapper-footer-text">Don't have an account? <a href="/create" class="text-reset">Register here</a></p>
+                        <a href="/password/reset" class="forgot-password-link">Forgot password?</a>
                     </div>
                 </div>
                 <div class="col-sm-6 px-0 d-none d-sm-block">
