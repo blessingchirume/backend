@@ -66,9 +66,9 @@
                     <li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
                     <li class="nav-item"><a href="about.html" class="nav-link">About us</a></li>
                     <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
-                    <li class="nav-item"><a href="gallery.html" class="nav-link">Gallery</a></li>
-                    <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
                     <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+                    <li class="nav-item"><a href="gallery.html" class="nav-link">Downloads</a></li>
+
                 </ul>
             </div>
         </div>
@@ -83,7 +83,7 @@
                     {{--<h2 class="subheading">Welcome to Lawn care</h2>--}}
                     <h1>Fruits and vegetables for everyone </h1>
                     <p class="mb-4">Just place and us work on getting it to your doorstep</p>
-                    <p><a href="#" class="btn btn-primary mr-md-4 py-2 px-4">Talk to an expert <span class="ion-ios-arrow-forward"></span></a></p>
+                    <p><a href="#" class="btn btn-primary mr-md-4 py-2 px-4">Shop now <span class="ion-ios-arrow-forward"></span></a></p>
                 </div>
             </div>
         </div>
