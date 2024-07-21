@@ -144,44 +144,44 @@
         </div>
     </section>
 
-    <section class="ftco-section ftco-no-pt ftco-no-pb bg-light">
+    {{--<section class="ftco-section ftco-no-pt ftco-no-pb bg-light">
         <div class="container">
             <div class="row d-flex">
                 <div class="col-md-6 d-flex">
-                    <div class="img img-video d-flex align-self-stretch align-items-center justify-content-center justify-content-md-end" style="background-image:url(images/about.jpg);">
-                        <a href="https://vimeo.com/45830194" class="icon-video popup-vimeo d-flex justify-content-center align-items-center">
-                            <span class="icon-play"></span>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-6 pl-md-5">
-                    <div class="row justify-content-start py-5">
-                        <div class="col-md-12 heading-section ftco-animate">
-                            <span class="subheading">Welcome to Lawn Care</span>
-                            <h2 class="mb-4">Welcome to Lawn Care Company</h2>
-                            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
-                            <div class="services-wrap">
-                                <a href="#" class="services-list">Gutter cleaning
-                                    <div class="btn-custom d-flex align-items-center justify-content-center"><span class="ion-ios-arrow-round-forward"></span></div>
-                                </a>
-                                <a href="#" class="services-list">Organinc fertilization and weed control
-                                    <div class="btn-custom d-flex align-items-center justify-content-center"><span class="ion-ios-arrow-round-forward"></span></div>
-                                </a>
-                                <a href="#" class="services-list">Compost top dressing &amp; compost tea application
-                                    <div class="btn-custom d-flex align-items-center justify-content-center"><span class="ion-ios-arrow-round-forward"></span></div>
-                                </a>
-                                <a href="#" class="services-list">New lawn installation
-                                    <div class="btn-custom d-flex align-items-center justify-content-center"><span class="ion-ios-arrow-round-forward"></span></div>
-                                </a>
-                                <a href="#" class="services-list">Mulch and other services available
-                                    <div class="btn-custom d-flex align-items-center justify-content-center"><span class="ion-ios-arrow-round-forward"></span></div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                    <div class="img img-video d-flex align-self-stretch align-items-center justify-content-center justify-content-md-end" style="background-image: url({{asset('lawncare/images/about.jpg')}})">
+    <a href="https://vimeo.com/45830194" class="icon-video popup-vimeo d-flex justify-content-center align-items-center">
+        <span class="icon-play"></span>
+    </a>
+    </div>
+    </div>
+    <div class="col-md-6 pl-md-5">
+        <div class="row justify-content-start py-5">
+            <div class="col-md-12 heading-section ftco-animate">
+                <span class="subheading">Welcome to Lawn Care</span>
+                <h2 class="mb-4">Welcome to Lawn Care Company</h2>
+                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
+                <div class="services-wrap">
+                    <a href="#" class="services-list">Gutter cleaning
+                        <div class="btn-custom d-flex align-items-center justify-content-center"><span class="ion-ios-arrow-round-forward"></span></div>
+                    </a>
+                    <a href="#" class="services-list">Organinc fertilization and weed control
+                        <div class="btn-custom d-flex align-items-center justify-content-center"><span class="ion-ios-arrow-round-forward"></span></div>
+                    </a>
+                    <a href="#" class="services-list">Compost top dressing &amp; compost tea application
+                        <div class="btn-custom d-flex align-items-center justify-content-center"><span class="ion-ios-arrow-round-forward"></span></div>
+                    </a>
+                    <a href="#" class="services-list">New lawn installation
+                        <div class="btn-custom d-flex align-items-center justify-content-center"><span class="ion-ios-arrow-round-forward"></span></div>
+                    </a>
+                    <a href="#" class="services-list">Mulch and other services available
+                        <div class="btn-custom d-flex align-items-center justify-content-center"><span class="ion-ios-arrow-round-forward"></span></div>
+                    </a>
                 </div>
             </div>
         </div>
+    </div>
+    </div>
+    </div>
     </section>
 
     <section class="ftco-section">
@@ -201,7 +201,7 @@
                                 </div>
                                 <div class="text text-center px-4">
                                     <h3><a href="#">Spring</a></h3>
-                                    <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                                    <p>Direct Fresh is a proudly Zimbabwean food delivery service provider for all ordinary Zimbabweans. Our products and services are engineered to give you a reliable, inclusive, safe, and convenient way to make purchases, payments, and receive your orders.</p>
                                 </div>
                             </div>
                         </div>
@@ -211,7 +211,7 @@
                                 </div>
                                 <div class="text text-center px-4">
                                     <h3><a href="#">Summer</a></h3>
-                                    <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                                    <p>Direct Fresh is a proudly Zimbabwean food delivery service provider for all ordinary Zimbabweans. Our products and services are engineered to give you a reliable, inclusive, safe, and convenient way to make purchases, payments, and receive your orders.</p>
                                 </div>
                             </div>
                         </div>
@@ -221,7 +221,7 @@
                                 </div>
                                 <div class="text text-center px-4">
                                     <h3><a href="#">Winter</a></h3>
-                                    <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                                    <p>Direct Fresh is a proudly Zimbabwean food delivery service provider for all ordinary Zimbabweans. Our products and services are engineered to give you a reliable, inclusive, safe, and convenient way to make purchases, payments, and receive your orders.</p>
                                 </div>
                             </div>
                         </div>
@@ -231,7 +231,7 @@
                                 </div>
                                 <div class="text text-center px-4">
                                     <h3><a href="#">Fall</a></h3>
-                                    <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                                    <p>Direct Fresh is a proudly Zimbabwean food delivery service provider for all ordinary Zimbabweans. Our products and services are engineered to give you a reliable, inclusive, safe, and convenient way to make purchases, payments, and receive your orders.</p>
                                 </div>
                             </div>
                         </div>
@@ -271,7 +271,7 @@
                         <div class="item">
                             <div class="testimony-wrap py-4">
                                 <div class="text">
-                                    <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                                    <p class="mb-4">Direct Fresh is a proudly Zimbabwean food delivery service provider for all ordinary Zimbabweans. Our products and services are engineered to give you a reliable, inclusive, safe, and convenient way to make purchases, payments, and receive your orders.</p>
                                     <div class="d-flex align-items-center">
                                         <div class="user-img" style="background-image: url(images/person_1.jpg)"></div>
                                         <div class="pl-3">
@@ -285,7 +285,7 @@
                         <div class="item">
                             <div class="testimony-wrap py-4">
                                 <div class="text">
-                                    <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                                    <p class="mb-4">Direct Fresh is a proudly Zimbabwean food delivery service provider for all ordinary Zimbabweans. Our products and services are engineered to give you a reliable, inclusive, safe, and convenient way to make purchases, payments, and receive your orders.</p>
                                     <div class="d-flex align-items-center">
                                         <div class="user-img" style="background-image: url(images/person_2.jpg)"></div>
                                         <div class="pl-3">
@@ -299,7 +299,7 @@
                         <div class="item">
                             <div class="testimony-wrap py-4">
                                 <div class="text">
-                                    <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                                    <p class="mb-4">Direct Fresh is a proudly Zimbabwean food delivery service provider for all ordinary Zimbabweans. Our products and services are engineered to give you a reliable, inclusive, safe, and convenient way to make purchases, payments, and receive your orders.</p>
                                     <div class="d-flex align-items-center">
                                         <div class="user-img" style="background-image: url(images/person_3.jpg)"></div>
                                         <div class="pl-3">
@@ -313,7 +313,7 @@
                         <div class="item">
                             <div class="testimony-wrap py-4">
                                 <div class="text">
-                                    <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                                    <p class="mb-4">Direct Fresh is a proudly Zimbabwean food delivery service provider for all ordinary Zimbabweans. Our products and services are engineered to give you a reliable, inclusive, safe, and convenient way to make purchases, payments, and receive your orders.</p>
                                     <div class="d-flex align-items-center">
                                         <div class="user-img" style="background-image: url(images/person_1.jpg)"></div>
                                         <div class="pl-3">
@@ -327,7 +327,7 @@
                         <div class="item">
                             <div class="testimony-wrap py-4">
                                 <div class="text">
-                                    <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                                    <p class="mb-4">Direct Fresh is a proudly Zimbabwean food delivery service provider for all ordinary Zimbabweans. Our products and services are engineered to give you a reliable, inclusive, safe, and convenient way to make purchases, payments, and receive your orders.</p>
                                     <div class="d-flex align-items-center">
                                         <div class="user-img" style="background-image: url(images/person_2.jpg)"></div>
                                         <div class="pl-3">
@@ -415,7 +415,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section>--}}
 
 
     <section class="ftco-section ftco-no-pt ftco-no-pb bg-primary">
@@ -445,8 +445,9 @@
             <div class="row mb-5">
                 <div class="col-md-6 col-lg">
                     <div class="ftco-footer-widget mb-4">
-                        <h2 class="logo"><a href="#">Lawn <span>Care</span></a></h2>
-                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                    <img height="50px !important" src="{{ asset('/images/logo/logo_trans.png') }}" alt="login image" class="logo">
+
+                        <p>Direct Fresh is a proudly Zimbabwean food delivery service provider for all ordinary Zimbabweans. Our products and services are engineered to give you a reliable, inclusive, safe, and convenient way to make purchases, payments, and receive your orders.</p>
                         <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
                             <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
                             <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
@@ -454,7 +455,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg">
+                {{--<div class="col-md-6 col-lg">
                     <div class="ftco-footer-widget mb-4 ml-md-5">
                         <h2 class="ftco-heading-2">Services</h2>
                         <ul class="list-unstyled">
@@ -465,15 +466,15 @@
                             <li><a href="#" class="py-1 d-block"><span class="ion-ios-arrow-forward mr-3"></span>New Lawn Installation</a></li>
                         </ul>
                     </div>
-                </div>
+                </div>--}}
                 <div class="col-md-6 col-lg">
                     <div class="ftco-footer-widget mb-4">
                         <h2 class="ftco-heading-2">Contact information</h2>
                         <div class="block-23 mb-3">
                             <ul>
-                                <li><span class="icon icon-map-marker"></span><span class="text">203 Fake St. Mountain View, San Francisco, California, USA</span></li>
-                                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+2 392 3929 210</span></a></li>
-                                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">info@yourdomain.com</span></a></li>
+                                <li><span class="icon icon-map-marker"></span><span class="text">4 Brunswick Lane Mt Pleasant, Harare, Zimbabwe</span></li>
+                                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+44 7749 935369</span></a></li>
+                                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">info@witevatrading.co.zw</span></a></li>
                             </ul>
                         </div>
                     </div>
@@ -502,7 +503,7 @@
                     <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                         Copyright &copy;<script>
                             document.write(new Date().getFullYear());
-                        </script> All rights reserved | This template is made with <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                        </script> All rights reserved 
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
                 </div>
             </div>
