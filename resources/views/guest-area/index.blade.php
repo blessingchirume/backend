@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>LawnCare - Free Bootstrap 4 Template by Colorlib</title>
+    <title>Fresh Direct</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -75,21 +75,21 @@
     </nav>
     <!-- END nav -->
 
-    <div class="hero-wrap js-fullheight" style="background-image: url({{asset('lawncare/images/bg_1.jpg')}})" data-stellar-background-ratio="0.5">
+    <div class="hero-wrap js-fullheight" style="background-image: url({{asset('lawncare/images/1.jpg')}})" data-stellar-background-ratio="0.5">
         <div class="overlay"></div>
         <div class="container">
             <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-start" data-scrollax-parent="true">
                 <div class="col-md-6 ftco-animate">
-                    <h2 class="subheading">Welcome to Lawn care</h2>
-                    <h1>Lawn care for everyone </h1>
-                    <p class="mb-4">Let us work on your yard</p>
-                    <p><a href="#" class="btn btn-primary mr-md-4 py-2 px-4">Learn more <span class="ion-ios-arrow-forward"></span></a></p>
+                    {{--<h2 class="subheading">Welcome to Lawn care</h2>--}}
+                    <h1>Fruits and vegetables for everyone </h1>
+                    <p class="mb-4">Just place and us work on getting it to your doorstep</p>
+                    <p><a href="#" class="btn btn-primary mr-md-4 py-2 px-4">Talk to an expert <span class="ion-ios-arrow-forward"></span></a></p>
                 </div>
             </div>
         </div>
     </div>
 
-    <section class="ftco-section ftco-no-pt">
+    {{--<section class="ftco-section ftco-no-pt">
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 py-5 order-md-last">
@@ -142,7 +142,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section>--}}
 
     {{--<section class="ftco-section ftco-no-pt ftco-no-pb bg-light">
         <div class="container">
