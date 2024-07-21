@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return redirect()->route('login');
+    return view('guest-area.index');
 });
 
 Route::get('/create', [UserController::class, 'create'])->name('user.create');
