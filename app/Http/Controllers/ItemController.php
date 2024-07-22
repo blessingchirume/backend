@@ -28,9 +28,8 @@ class ItemController extends Controller
         ]);
 
         try {
-
             $imageName = time().'.'.$request->file('image')->getClientOriginalExtension();
-            request()->image->move(public_path('images'), $imageName);
+            request()->image->move(request()->getHttpHost(), $imageName);
 
             $user = new Item();
             $user->create([
