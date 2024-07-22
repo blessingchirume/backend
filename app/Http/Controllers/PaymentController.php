@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use phpseclib3\File\ASN1\Maps\EncryptedData;
 
 class PaymentController extends Controller
 {
@@ -211,40 +212,47 @@ class PaymentController extends Controller
     {
         # Create the payment
         $payment = $this->createPayment('USD', 'PZW211', $request->paymentDetails["email"], $request->paymentDetails["phoneNumber"], $request->paymentDetails["name"]);
-
+        // return json_encode($payment);
         $requiredFields = [
-            'fieldType' => 'TEXT',
             'customerPhoneNumber' => $request->paymentDetails["phoneNumber"],
-            'displayName' => $request->paymentDetails["phoneNumber"],
-            'optional' => false
         ];
 
         # Send Payment
         $response = $this->makeSeamlessPayment($payment, 'Online Transaction', $request->paymentDetails["amount"], $requiredFields, '7442');
         if ($response) {
-            # Save the reference number and/or poll url (used to check the status of a transaction)
-            $referenceNumber = $response->referenceNumber();
-            $pollUrl = $response->pollUrl();
+            try {
+                $orderTotal = 0.0;
+                $itemIds = [];
 
-            $order = new Order();
+                foreach ($request->orderDetails["order_items"] as $row) {
+                   
 
-            // return response($request);
+                    $item = Item::where('item_code', $row['item_no'])->first();
+                    $orderTotal += ($item->price * $row['quantity']);
+                    array_push($itemIds, $item->id);
+                }
 
-            $order->create([
-                'order_number' => $request->orderDetails["order_number"],
-                'order_ref_number' => $request->orderDetails["order_ref_number"],
-                'payment_status' => $request->orderDetails["payment_status"],
-                'customer_delivery_status' => $request->orderDetails["customer_delivery_status"],
-                'admin_delivery_status' => $request->orderDetails["admin_delivery_status"],
-                'delivery_date' => $request->orderDetails["delivery_date"],
-                'approval_status' => $request->orderDetails["approval_status"],
-                'user_id' => Auth::user()->id
+                // return $request->orderDetails["order_items"];
 
-            ]);
+                $orderId = DB::table('orders')->insertGetId([
+                    'shipping_address' => $request->orderDetails["shipping_address"],
+                    'order_number' => 100010007,
+                    'order_ref_number' => $request->orderDetails["order_ref_number"],
+                    'payment_status' => 0,
+                    'customer_delivery_status' => 0,
+                    'admin_delivery_status' => 0,
+                    'delivery_date' => date('Y-m-d'),
+                    'approval_status' => 1,
+                    'user_id' => Auth::user()->id,
+                    'total' => $orderTotal
 
+                ]);
 
-            foreach ($request->orderDetails["order_items"] as $row) {
-                $order->items()->attach(Item::where('id', $row['item_id'])->first());
+                $order = Order::find($orderId);
+                $order->items()->attach($itemIds);
+                return response("Created", 201);
+            } catch (\Throwable $th) {
+                return $th->getMessage();
             }
         } else {
             #Get Error Message
@@ -262,10 +270,22 @@ class PaymentController extends Controller
         $payment->returnUrl = $this->returnUrl;
         $payment->reasonForPayment = $reasonForPayment;
         $payment->amountDetails = new Amount($amount, $payment->currencyCode);
-
         $payment->setRequiredFields($requiredFields);
+        $paymentDetails = [
+            'amountDetails' => [
+                'amount' => $amount,
+                'currencyCode' => $payment->currencyCode
+            ],
+            'merchantReference' =>   floor(rand(0, 10000)), // this has to be unique for each transaction 
+            'reasonForPayment' => "Waterworks credits purchase",
+            'resultUrl' => $this->resultUrl,
+            'returnUrl' => $this->returnUrl,
+            'paymentMethodCode' =>  $payment->paymentMethodCode,
+            'customer' => $payment->customer,
+            'paymentMethodRequiredFields' => $requiredFields
+        ];
 
-        $encryptedData = $this->encrypt(json_encode($payment));
+        $encryptedData = $this->encrypt(json_encode($paymentDetails));
 
         $payload = json_encode(['payload' => $encryptedData]);
 
@@ -279,11 +299,17 @@ class PaymentController extends Controller
         $jsonDecoded = json_decode($decryptedData, true);
 
         $referenceNumber = $jsonDecoded['referenceNumber'];
+
         $pollUrl = $jsonDecoded['pollUrl'];
+
         $paymentDate = date('Y-m-d HH:mm:ss');
-        $user_id = 1;
+
+        $user_id = Auth::user()->id;
+
         $type = $jsonDecoded['amountDetails']['currencyCode'];
+
         $order_number = '1000104';
+
         $amount = $jsonDecoded['amountDetails']['merchantAmount'];
 
         DB::table('payments')->insert([
@@ -294,6 +320,7 @@ class PaymentController extends Controller
             'poll_url' => $pollUrl,
             'payment_date' => $paymentDate,
             'amount' => $amount,
+            'status' => ''
         ]);
 
         return $jsonDecoded;
@@ -455,5 +482,30 @@ class PaymentController extends Controller
     {
         $payments = DB::table('payments')->get();
         return view('modules.payments.index', compact('payments'));
+    }
+
+    public function pollTransaction($paymentId)
+    {
+
+        $payment = DB::table('payments')->where('id', $paymentId)->first();
+        $response = $this->initCurlRequest("GET", $payment->poll_url);
+
+        if ($response instanceof ErrorResponse)
+            return $response;
+
+        $decryptedData = $this->decrypt($response['payload']);
+
+        $jsonDecoded = json_decode($decryptedData, true);
+        $referenceNumber = $jsonDecoded['referenceNumber'];
+        $pollUrl = $jsonDecoded['pollUrl'];
+        $paid = $jsonDecoded['transactionStatus'] == 'SUCCESS';
+
+        DB::table('payments')->where('id', $paymentId)->update([
+            'status' => $jsonDecoded['transactionStatus'],
+        ]);
+
+        return redirect()->route('payment.index');
+
+        // return new Response($referenceNumber, $pollUrl, null, $paid);
     }
 }

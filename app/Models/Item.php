@@ -12,6 +12,6 @@ class Item extends Model
     protected $guarded = [];
 
     public function orders () {
-        return $this->belongsToMany(Order::class, 'order_items', 'order_id', 'item_id');
+        return $this->belongsToMany(Order::class, 'order_items', 'item_id', 'order_id');
     }
 }

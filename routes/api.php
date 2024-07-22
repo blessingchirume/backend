@@ -22,16 +22,25 @@ Route::post('/login', [AuthController::class, 'authenticate']);
 
 Route::post('/register', [AuthController::class, 'register']);
 
+Route::post('/forgot-password', [AuthController::class, 'passwordReset']);
+
+
 Route::group(['middleware' => 'auth:api'], function(){
 
-    Route::get('/products', [ApplicationController::class, 'items']);
+    Route::prefix('/account')->group(function(){
 
-    Route::post('/order', [PaymentController::class, 'seamlessPayment']);
+        Route::patch('/update', [AuthController::class, 'update']);
+
+        Route::patch('/delete', [AuthController::class, 'delete']);
+
+    });
+
+    Route::post('/confirm-delivery', [ApplicationController::class, 'confirmDelivery']);
+
+    Route::get('/products', [ApplicationController::class, 'items']);
     
     Route::get('/order', [ApplicationController::class, 'orders']);  
     
-    Route::post('/make-payment', [PaymentController::class, 'init']);
-
     Route::post('/make-seamless-payment', [PaymentController::class, 'seamlessPayment']);
 
 });

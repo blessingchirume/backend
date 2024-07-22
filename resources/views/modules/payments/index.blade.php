@@ -27,6 +27,7 @@
                         <th>Reference Number</th>
                         <th>Type</th>
                         <th>Amount</th>
+                        <th>approval_status</th>
                         <th>Date</th>
                         {{--<th>Customer</th>
                         <th>Created</th>
@@ -35,20 +36,21 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($payments as $index => $value)
+                    @foreach($payments as $index => $payment)
                     <tr>
-                        <td>{{$index}}</td>
-                        <td>{{$value->order_number}}</td>
-                        <td>{{$value->ref_number}}</td>
-                        <td>{{$value->type}}</td>
-                        <td>{{$value->amount}}</td>
-                        <td>{{$value->payment_date}}</td>
+                        <td>{{$index + 1}}</td>
+                        <td>{{$payment->order_number}}</td>
+                        <td>{{$payment->ref_number}}</td>
+                        <td>{{$payment->type}}</td>
+                        <td>{{$payment->amount}}</td>
+                        <td>{{strtoupper($payment->status)}}</td>
+                        <td>{{$payment->payment_date}}</td>
                         {{--<td>{{$value->user_id}}</td>
-                        <td>{{$value->created_at}}</td>
-                        <td>{{$value->updated_at}}</td>--}}
+                        <td>{{$payment->created_at}}</td>
+                        <td>{{$payment->updated_at}}</td>--}}
                         <td>
-                            <a href="">view</a>
-                            <a href="">pdf</a>
+                            <a href="{{ route('payment.poll', $payment->id) }}">Poll</a>
+                            <a href="">View</a>
                         </td>
                     </tr>
                     @endforeach
