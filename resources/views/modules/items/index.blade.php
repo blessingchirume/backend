@@ -16,7 +16,7 @@
     </div>
     <div class="card">
         <div class="card-header">
-            <a href="{{ route('user.create') }}" type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
+            <a href="{{ route('item.create') }}" type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
                 Generate
             </a>
         </div>
@@ -27,6 +27,7 @@
                         <th>Item Code</th>
                         <th>Item Desciption</th>
                         <th>price</th>
+                        <th>image</th>
                         <th>Created</th>
                         <th>Updated</th>
                         <th>Action</th>
@@ -38,6 +39,7 @@
                         <td>{{$item->item_code}}</td>
                         <td>{{$item->item_description}}</td>
                         <td>{{$item->price}}</td>
+                        <td>{{$item->image}}</td>
                         <td>{{$item->created_at}}</td>
                         <td>{{$item->updated_at}}</td>
                         <td>

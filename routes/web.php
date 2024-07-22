@@ -102,5 +102,5 @@ Route::group(['middleware' => 'auth',], function () {
 });
 
 Auth::routes([
-    'verify' => true
+    // 'verify' => true
 ]);

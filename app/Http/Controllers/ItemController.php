@@ -24,15 +24,21 @@ class ItemController extends Controller
 
             'item_description' => 'required',
             'price' => 'required',
+            // 'image' => 'required|image|mimes:jpeg,png,jpg|max:20480'
         ]);
+
         try {
+
+            $imageName = time().'.'.$request->file('image')->getClientOriginalExtension();
+            request()->image->move(public_path('images'), $imageName);
+
             $user = new Item();
             $user->create([
                 'item_code' => rand(000000, 999999),
                 'item_description' => $request->item_description,
                 'price' => $request->price,
                 'category' => 'sea food',
-                'image' => 'https://zonefresh.com.au/wp-content/uploads/PEACHES-WHITE--600x600.jpg'
+                'image' => public_path('images/'.$imageName)
             ]);
             return redirect()->route('user.index')->with('success', 'product item created successfully');
         } catch (\Throwable $th) {

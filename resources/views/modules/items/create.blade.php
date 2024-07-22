@@ -22,7 +22,7 @@
     </div>
 
     <div class="card">
-        <form method="post" action="{{route('item.store')}}">
+        <form method="post" action="{{route('item.store')}}" enctype="multipart/form-data">
             <div class="card-header">
                 <a href="{{ route('item.index') }}" type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
                     back
@@ -44,6 +44,15 @@
                             <input class="form-control" id="name" name="price" type="text" placeholder="price" value="{{old('price')}}" required>
                         </div>
                     </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="name">Image</label>
+                            <input class="form-control" id="image" name="image" type="file" placeholder="description" value="{{old('image')}}" required>
+                        </div>
+                    </div>
+                   
                 </div>
             </div>
             <div class="card-footer">
