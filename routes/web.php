@@ -22,11 +22,39 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('guest-area.index');
-});
+})->name('guest.home');
+
+Route::get('/about', function () {
+    return view('guest-area.about');
+})->name('guest.about');
+
+Route::get('/services', function () {
+    return view('guest-area.services');
+})->name('guest.services');
+
+Route::get('/contact', function () {
+    return view('guest-area.contact');
+})->name('guest.contact');
+
+Route::get('/downloads', function () {
+
+    //return Storage::download('public/downloads/Comex.apk'); 
+    // Check if file exists in app/storage/file folder
+    $path = public_path('storage\downloads');
+    $file_path = $path . '\app-release.apk';
+
+    if (file_exists($file_path)) {
+        return response()->download($file_path);
+    } else {
+        return response(['error' => 'Requested file does not exist on server!' . $file_path]);
+    }
+})->name('guest.downloads');
+
+
 
 Route::get('/create', [UserController::class, 'create'])->name('user.create');
 
-Route::group(['middleware' => 'auth', ], function () {
+Route::group(['middleware' => 'auth',], function () {
 
     Route::get('/make-payment', [PaymentController::class, 'seamlessPayment'])->name('make-payment');
 
