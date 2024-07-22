@@ -8,7 +8,7 @@
                 <div class="col-md-6 ftco-animate">
                     {{--<h2 class="subheading">Welcome to Lawn care</h2>--}}
                     <h1>Fruits and vegetables for everyone </h1>
-                    <p class="mb-4">Just place and us work on getting it to your doorstep</p>
+                    <p class="mb-4">Just place an order and let us work on getting it to your doorstep</p>
                     <p><a href="#" class="btn btn-primary mr-md-4 py-2 px-4">Shop now <span class="ion-ios-arrow-forward"></span></a></p>
                 </div>
             </div>
