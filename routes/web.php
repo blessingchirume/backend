@@ -40,8 +40,8 @@ Route::get('/downloads', function () {
 
     //return Storage::download('public/downloads/Comex.apk'); 
     // Check if file exists in app/storage/file folder
-    $path = public_path('storage\downloads');
-    $file_path = $path . '\app-release.apk';
+    $path = public_path('storage/downloads');
+    $file_path = $path . '/app-release.apk';
 
     if (file_exists($file_path)) {
         return response()->download($file_path);
