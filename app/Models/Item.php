@@ -14,4 +14,8 @@ class Item extends Model
     public function orders () {
         return $this->belongsToMany(Order::class, 'order_items', 'item_id', 'order_id');
     }
+
+    public function category(){
+        return $this->belongsTo(Category::class);
+    }
 }

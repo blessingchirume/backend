@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\GuestController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\SubscriberController;
 use App\Http\Controllers\UserController;
 use Codevirtus\Payments\Pesepay;
 use Illuminate\Support\Facades\Auth;
@@ -20,9 +22,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('guest-area.index');
-})->name('guest.home');
+Route::get('/', [GuestController::class, 'index'])->name('guest.home');
 
 Route::get('/about', function () {
     return view('guest-area.about');
@@ -35,6 +35,14 @@ Route::get('/services', function () {
 Route::get('/contact', function () {
     return view('guest-area.contact');
 })->name('guest.contact');
+
+Route::post('/subscribe', [SubscriberController::class, 'store'])->name('guest.subscribe');
+
+Route::get('/image', function () {
+    return view('modules.items.crop-image');
+})->name('guest.upload');
+
+Route::post('crop-image-upload', [ItemController::class, 'uploadCropImage']);
 
 Route::get('/downloads', function () {
 

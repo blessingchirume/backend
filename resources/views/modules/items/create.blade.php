@@ -1,6 +1,10 @@
 @extends('app')
 
 @section('content')
+
+<style type="text/css">
+
+</style>
 <section class="content">
     <div class="content-header">
         <div class="container-fluid">
@@ -10,8 +14,6 @@
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-
-
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -29,7 +31,6 @@
                 </a>
             </div>
             <div class="card-body">
-
                 {{ csrf_field() }}
                 <div class="row">
                     <div class="col-sm-6">
@@ -49,10 +50,19 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="name">Image</label>
-                            <input class="form-control" id="image" name="image" type="file" placeholder="description" value="{{old('image')}}" required>
+                            <input class="form-control image" id="image" name="image" type="file" value="{{old('image')}}" required>
                         </div>
                     </div>
-                   
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="name">Category</label>
+                            <select name="category" id="category" class="form-control">
+                                @foreach($categories as $category)
+                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="card-footer">
@@ -64,4 +74,6 @@
         </form>
     </div>
 </section>
+
+
 @endsection

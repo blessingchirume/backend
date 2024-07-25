@@ -35,7 +35,7 @@
 									<span class="fa fa-phone"></span>
 								</div>
 								<div class="text">
-									<p><span>Phone:</span> <a href="tel://1234567920">+44 7749 935369</a></p>
+									<p><span>Phone:</span> <a href="tel://+44 7749 935369">+44 7749 935369</a></p>
 								</div>
 							</div>
 						</div>
@@ -45,7 +45,7 @@
 									<span class="fa fa-paper-plane"></span>
 								</div>
 								<div class="text">
-									<p><span>Email:</span> <a href="mailto:info@yoursite.com">info@witevatrading.co.zw</a></p>
+									<p><span>Email:</span> <a href="mailto:info@witevatrading.co.zw">info@witevatrading.co.zw</a></p>
 								</div>
 							</div>
 						</div>
@@ -59,7 +59,7 @@
 								<div id="form-message-success" class="mb-4">
 									Your message was sent, thank you!
 								</div>
-								<form method="POST" id="contactForm" name="contactForm" class="contactForm">
+								<form method="POST" id="contactForm" name="contactForm" class="contactForm" action="">
 									<div class="row">
 										<div class="col-md-6">
 											<div class="form-group">

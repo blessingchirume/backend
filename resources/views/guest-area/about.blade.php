@@ -13,11 +13,12 @@
 	</div>
 </section>
 
-{{--<section class="ftco-section ftco-no-pt ftco-no-pb bg-light">
+<section class="ftco-section ftco-no-pt ftco-no-pb bg-light">
 	<div class="container">
 		<div class="row d-flex">
 			<div class="col-md-6 d-flex">
-				<div class="img img-video d-flex align-self-stretch align-items-center justify-content-center justify-content-md-end" style="background-image: url({{ asset('lawncare/images/about.jpg') }});">
+				<div class="img img-video d-flex align-self-stretch align-items-center justify-content-center justify-content-md-end" style="background-image: url({{ asset('lawncare/images/apple-5.jpg') }});">
+					<div class="overlay"></div>
 					<a href="https://vimeo.com/45830194" class="icon-video popup-vimeo d-flex justify-content-center align-items-center">
 						<span class="icon-play"></span>
 					</a>
@@ -26,23 +27,25 @@
 			<div class="col-md-6 pl-md-5">
 				<div class="row justify-content-start py-5">
 					<div class="col-md-12 heading-section ftco-animate">
-						<span class="subheading">Welcome to Lawn Care</span>
-						<h2 class="mb-4">Our Accolades</h2>
-						<p>Our vision is to disrupt traditional ordering by using technology by expanding your ordering and financial inclusion and convenience, to ultimately cut down on the cost of ordering for your day-to-day needs.</p>
+						{{--<span class="subheading">Welcome to Lawn Care</span>--}}
+						<h2 class="mb-4">Our Mission</h2>
+						<p>Fresh Direct is your go-to destination for fresh, delicious fruit delivered right to your doorstep. We believe that healthy eating should be convenient, and that's why we're committed to bringing you the finest produce nature has to offer. Enjoy the sweetness of life, one fruit basket at a time. Our vision is to disrupt traditional ordering by using technology to expand your ordering, financial inclusion and convenience to ultimately cut down on the cost of ordering your day-to-day needs.</p>
+						<div class="block"></div>
+						<h2 class="mb-4">Our Values</h2>
 						<div class="services-wrap">
-							<a href="#" class="services-list">Gutter cleaning
+							<a href="#" class="services-list">Emphasis on Freshness and Quality
 								<div class="btn-custom d-flex align-items-center justify-content-center"><span class="ion-ios-arrow-round-forward"></span></div>
 							</a>
-							<a href="#" class="services-list">Organinc fertilization and weed control
+							<a href="#" class="services-list">Focusing on Convenience and Customer Satisfaction
 								<div class="btn-custom d-flex align-items-center justify-content-center"><span class="ion-ios-arrow-round-forward"></span></div>
 							</a>
-							<a href="#" class="services-list">Compost top dressing &amp; compost tea application
+							<a href="#" class="services-list">Emphasis on Sustainability and Ethical Sourcing
 								<div class="btn-custom d-flex align-items-center justify-content-center"><span class="ion-ios-arrow-round-forward"></span></div>
 							</a>
-							<a href="#" class="services-list">New lawn installation
+							<a href="#" class="services-list">Corporate Gifting and Customer Service
 								<div class="btn-custom d-flex align-items-center justify-content-center"><span class="ion-ios-arrow-round-forward"></span></div>
 							</a>
-							<a href="#" class="services-list">Mulch and other services available
+							<a href="#" class="services-list">Focusing on Health and Wellness
 								<div class="btn-custom d-flex align-items-center justify-content-center"><span class="ion-ios-arrow-round-forward"></span></div>
 							</a>
 						</div>
@@ -52,21 +55,6 @@
 		</div>
 	</div>
 </section>
-
-<section class="ftco-intro bg-primary py-5">
-	<div class="container">
-		<div class="row justify-content-between align-items-center">
-			<div class="col-md-6">
-				<h2>Contact with us</h2>
-				<p>Do you have any comments or questions about the products then contact us.</p>
-			</div>
-			<div class="col-md-5 text-md-right">
-				<span class="contact-number">+00(123) 456-78-09</span>
-			</div>
-		</div>
-	</div>
-</section>--}}
-
 
 <section class="ftco-section testimony-section">
 	<div class="container">

@@ -43,7 +43,7 @@
             </button>
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav m-auto">
-                    <li class="nav-item active"><a href="{{ route('guest.home') }}" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="{{ route('guest.home') }}" class="nav-link">Home</a></li>
                     <li class="nav-item"><a href="{{ route('guest.about') }}" class="nav-link">About us</a></li>
                     <li class="nav-item"><a href="{{ route('guest.services') }}" class="nav-link">Services</a></li>
                     <li class="nav-item"><a href="{{ route('guest.contact') }}" class="nav-link">Contact</a></li>
@@ -58,7 +58,9 @@
 
     @yield('content')
 
-
+    <div class="container-fluid">
+        @include('partials.alert')
+    </div>
     <section class="ftco-section ftco-no-pt ftco-no-pb bg-primary">
         <div class="container">
             <div class="row d-flex justify-content-center">
@@ -68,9 +70,10 @@
                             <h2 class="mb-0" style="color:white; font-size: 24px;">Subcribe to our Newsletter</h2>
                         </div>
                         <div class="col-md-6 d-flex align-items-center">
-                            <form action="#" class="subscribe-form">
+                            <form method="POST" action="{{ route('guest.subscribe') }}" class="subscribe-form">
+                                {{ csrf_field() }}
                                 <div class="form-group d-flex">
-                                    <input type="text" class="form-control" placeholder="Enter email address">
+                                    <input name="email" type="email" class="form-control" placeholder="Enter email address">
                                     <input type="submit" value="Subscribe" class="submit px-3">
                                 </div>
                             </form>
@@ -86,7 +89,7 @@
             <div class="row mb-5">
                 <div class="col-md-6 col-lg">
                     <div class="ftco-footer-widget mb-4">
-                    <img height="50px !important" src="{{ asset('/images/logo/logo_trans.png') }}" alt="login image" class="logo">
+                        <img height="50px !important" src="{{ asset('/images/logo/logo_trans.png') }}" alt="login image" class="logo">
 
                         <p>Direct Fresh is a proudly Zimbabwean food delivery service provider for all ordinary Zimbabweans. Our products and services are engineered to give you a reliable, inclusive, safe, and convenient way to make purchases, payments, and receive your orders.</p>
                         <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
@@ -144,8 +147,9 @@
                     <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                         Copyright &copy;<script>
                             document.write(new Date().getFullYear());
-                        </script> All rights reserved 
-                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+                        </script> All rights reserved
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    </p>
                 </div>
             </div>
         </div>
