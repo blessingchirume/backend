@@ -22,4 +22,6 @@
     <link rel="stylesheet" href="{{ asset('lawncare/css/flaticon.css') }}">
     <link rel="stylesheet" href="{{ asset('lawncare/css/icomoon.css') }}">
     <link rel="stylesheet" href="{{ asset('lawncare/css/style.css') }}">
+    <link rel="shortcut icon" href="{{ asset('images/logo/icon_trans.png') }}">
+
 </head>

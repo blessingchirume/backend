@@ -21,6 +21,9 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
+    <link rel="shortcut icon" href="{{ asset('images/logo/icon_trans.png') }}">
+
+
     <style type="text/css">
         body {
             font-family: 'Nunito', sans-serif;

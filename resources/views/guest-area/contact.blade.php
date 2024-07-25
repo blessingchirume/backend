@@ -49,10 +49,10 @@
 								</div>
 							</div>
 						</div>
-						
+
 					</div>
 					<div class="row no-gutters">
-						<div class="col-md-7">
+						<div class="col-md-8">
 							<div class="contact-wrap w-100 p-md-5 p-4">
 								<h3 class="mb-4">Contact Us</h3>
 								<div id="form-message-warning" class="mb-4"></div>
@@ -95,14 +95,31 @@
 								</form>
 							</div>
 						</div>
-						<div class="col-md-5 d-flex align-items-stretch">
-							<div class="info-wrap w-100 p-5 img" style="background-image: url(images/about.jpg);">
+						<div class="col-md-4 d-flex align-items-stretch">
+							<div class="mapouter">
+								<div class="gmap_canvas"><iframe width="325" height="634" id="gmap_canvas" src="https://maps.google.com/maps?q=4%20Brunswick%20Lane%20Mt%20Pleasant,%20Harare,%20Zimbabwe&t=&z=11&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://123movies-to.org">123movies</a><br>
+									<style>
+										.mapouter {
+											position: relative;
+											text-align: right;
+											height: 634px;
+											width: 325px;
+										}
+									</style><a href="https://www.embedgooglemap.net"></a>
+									<style>
+										.gmap_canvas {
+											overflow: hidden;
+											background: none !important;
+											height: 634px;
+											width: 325px;
+										}
+									</style>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 </section>
 @endsection
