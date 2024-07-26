@@ -48,4 +48,44 @@ class OrderController extends Controller
             return redirect()->route('order.show', $order)->with('error', $th);
         }
     }
+
+    public function approve(Order $order)
+    {
+        try {
+            $order->update(['approval_status' => 1]);
+            return redirect()->route('order.show', $order)->with('success', 'order approved successfully!');
+        } catch (\Throwable $th) {
+            return redirect()->route('order.show', $order)->with('error', $th);
+        }
+    }
+
+    public function reject(Order $order)
+    {
+        try {
+            $order->update(['approval_status' => 2]);
+            return redirect()->route('order.show', $order)->with('success', 'order deleted successfully!');
+        } catch (\Throwable $th) {
+            return redirect()->route('order.show', $order)->with('error', $th);
+        }
+    }
+
+    public function dispatchOrder(Order $order)
+    {
+        try {
+            $order->update(['admin_delivery_status' => 1]);
+            return redirect()->route('order.show', $order)->with('success', 'order dispatched successfully!');
+        } catch (\Throwable $th) {
+            return redirect()->route('order.show', $order)->with('error', $th);
+        }
+    }
+
+    public function confirmDelivery(Order $order)
+    {
+        try {
+            $order->update(['customer_delivery_status' => 1]);
+            return redirect()->route('order.show', $order)->with('success', 'order delivered successfully!');
+        } catch (\Throwable $th) {
+            return redirect()->route('order.show', $order)->with('error', $th);
+        }
+    }
 }

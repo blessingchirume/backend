@@ -16,7 +16,7 @@
     </div>
     <div class="card">
         <div class="card-header">
-            <a href="{{ route('item.create') }}" type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
+            <a href="{{ route('item.create') }}" type="button" class="btn btn-outline-success float-right" style="margin-right: 5px;">
                 Generate
             </a>
         </div>
@@ -43,8 +43,7 @@
                         <td>{{$item->created_at}}</td>
                         <td>{{$item->updated_at}}</td>
                         <td>
-                            <a href="">view</a>
-                            <a href="">pdf</a>
+                            {{--<a href="">view</a>--}}
                         </td>
                     </tr>
                     @endforeach

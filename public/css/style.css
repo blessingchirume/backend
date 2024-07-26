@@ -1,3 +1,13 @@
 .nav-item .nav-link {
     color: #88A538 !important;
 }
+
+.page-item.active .page-link {
+    background-color: #88A538 !important;
+    border: #88A538 !important;
+}
+
+.btn-success {
+    background-color: #88A538 !important;
+    border: #88A538 !important;
+}

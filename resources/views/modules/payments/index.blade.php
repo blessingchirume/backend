@@ -50,7 +50,7 @@
                         <td>{{$payment->updated_at}}</td>--}}
                         <td>
                             <a href="{{ route('payment.poll', $payment->id) }}">Poll</a>
-                            <a href="">View</a>
+                           
                         </td>
                     </tr>
                     @endforeach

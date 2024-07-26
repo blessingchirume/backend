@@ -93,6 +93,11 @@ Route::group(['middleware' => 'auth',], function () {
         Route::post('/', [OrderController::class, 'store'])->name('order.store');
         Route::post('/update/{order}', [OrderController::class, 'update'])->name('order.update');
         Route::post('/delete/{order}', [OrderController::class, 'destroy'])->name('order.delete');
+
+        Route::post('/approve/{order}', [OrderController::class, 'approve'])->name('order.approve');
+        Route::post('/reject/{order}', [OrderController::class, 'reject'])->name('order.reject');
+        Route::post('/dispatch/{order}', [OrderController::class, 'dispatchOrder'])->name('order.dispatch');
+        Route::post('/confirm-delivery/{order}', [OrderController::class, 'confirmDelivery'])->name('order.delivery.confirm');
     });
 
     Route::prefix('payment')->group(function () {

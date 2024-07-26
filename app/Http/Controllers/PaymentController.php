@@ -225,7 +225,7 @@ class PaymentController extends Controller
                 $itemIds = [];
 
                 foreach ($request->orderDetails["order_items"] as $row) {
-                   
+
 
                     $item = Item::where('item_code', $row['item_no'])->first();
                     $orderTotal += ($item->price * $row['quantity']);
@@ -236,7 +236,7 @@ class PaymentController extends Controller
 
                 $orderId = DB::table('orders')->insertGetId([
                     'shipping_address' => $request->orderDetails["shipping_address"],
-                    'order_number' => 100010007,
+                    'order_number' => uniqid(),
                     'order_ref_number' => $request->orderDetails["order_ref_number"],
                     'payment_status' => 0,
                     'customer_delivery_status' => 0,
@@ -250,6 +250,9 @@ class PaymentController extends Controller
 
                 $order = Order::find($orderId);
                 $order->items()->attach($itemIds);
+
+                DB::table('payments')->where('id',  session()->get('paymentId'))->update(['order_number' => $order->order_number]);
+
                 return response("Created", 201);
             } catch (\Throwable $th) {
                 return $th->getMessage();
@@ -312,7 +315,7 @@ class PaymentController extends Controller
 
         $amount = $jsonDecoded['amountDetails']['merchantAmount'];
 
-        DB::table('payments')->insert([
+        $paymentId = DB::table('payments')->insertGetId([
             'user_id' => $user_id,
             'type' => $type,
             'order_number' => $order_number,
@@ -322,6 +325,8 @@ class PaymentController extends Controller
             'amount' => $amount,
             'status' => ''
         ]);
+
+        session()->put('paymentId', $paymentId);
 
         return $jsonDecoded;
 
@@ -496,16 +501,19 @@ class PaymentController extends Controller
         $decryptedData = $this->decrypt($response['payload']);
 
         $jsonDecoded = json_decode($decryptedData, true);
-        $referenceNumber = $jsonDecoded['referenceNumber'];
-        $pollUrl = $jsonDecoded['pollUrl'];
-        $paid = $jsonDecoded['transactionStatus'] == 'SUCCESS';
+        // $referenceNumber = $jsonDecoded['referenceNumber'];
+        // $pollUrl = $jsonDecoded['pollUrl'];
+        // $paid = $jsonDecoded['transactionStatus'] == 'SUCCESS';
 
         DB::table('payments')->where('id', $paymentId)->update([
             'status' => $jsonDecoded['transactionStatus'],
         ]);
 
-        return redirect()->route('payment.index');
+        DB::table('orders')->where('order_number', $payment->order_number)->update([
+            'payment_status' => $jsonDecoded['transactionStatus'] == 'SUCCESS' ? 1 : 0, 'payment_date' => $payment->payment_date
+        ]);
 
-        // return new Response($referenceNumber, $pollUrl, null, $paid);
+
+        return redirect()->route('payment.index');
     }
 }

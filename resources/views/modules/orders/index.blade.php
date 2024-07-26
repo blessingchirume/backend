@@ -16,7 +16,7 @@
     </div>
     <div class="card">
         <div class="card-header">
-            <a href="{{ route('user.create') }}" type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
+            <a href="{{ route('user.create') }}" type="button" class="btn btn-outline-success float-right" style="margin-right: 5px;">
                 Generate
             </a>
         </div>
@@ -25,7 +25,6 @@
                 <thead>
                     <tr>
                         <th>Order Number</th>
-                        <th>Reference Number</th>
                         <th>Payment Status</th>
                         <th>Transit Status</th>
                         <th>Delivery status</th>
@@ -39,7 +38,6 @@
                     @foreach($orders as $order)
                     <tr>
                         <td>{{$order->order_number}}</td>
-                        <td>{{$order->order_ref_number}}</td>
                         <td><x-status :status="$order->payment_status"/></td>
                         <td><x-status :status="$order->customer_delivery_status"/></td>
                         <td><x-status :status="$order->admin_delivery_status"/></td>
