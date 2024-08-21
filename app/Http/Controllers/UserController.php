@@ -47,7 +47,7 @@ class UserController extends Controller
                 'surname' => $request->surname,
                 'email' => $request->email,
                 'phone' => $request->phone,
-                'password' => Hash::make('12345678'),
+                'password' => Hash::make($request->request),
             ]);
             return redirect()->route('user.index')->with('success', 'user created successfully');
         } catch (\Throwable $th) {
