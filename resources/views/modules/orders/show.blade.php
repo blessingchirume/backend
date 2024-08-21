@@ -16,10 +16,10 @@
     </div>
     <ul class="nav nav-tabs" id="custom-content-below-tab" role="tablist">
         <li class="nav-item">
-            <a class="nav-link " id="custom-content-below-home-tab" data-toggle="pill" href="#custom-content-below-home" role="tab" aria-controls="custom-content-below-home" aria-selected="true">Items</a>
+            <a class="nav-link " id="custom-content-below-home-tab" data-bs-toggle="pill" href="#custom-content-below-home" role="tab" aria-controls="custom-content-below-home" aria-selected="true">Items</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link active" id="patient-details-acruals-tab" data-toggle="pill" href="#patient-details-acruals" role="tab" aria-controls="patient-details-acruals" aria-selected="true">Details</a>
+            <a class="nav-link active" id="patient-details-acruals-tab" data-bs-toggle="pill" href="#patient-details-acruals" role="tab" aria-controls="patient-details-acruals" aria-selected="true">Details</a>
         </li>
     </ul>
     <div class="tab-content" id="custom-content-below-tabContent">
