@@ -65,7 +65,7 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="name">Password</label>
-                            <input class="form-control" id="password" name="password" type="text" placeholder="********" value="{{ old('password') }}" required>
+                            <input class="form-control" id="password" name="password" type="password" placeholder="********" value="{{ old('password') }}" required>
                         </div>
                     </div>
                 </div>
