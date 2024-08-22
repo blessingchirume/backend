@@ -64,8 +64,8 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label for="name">Designation</label>
-                            <input class="form-control" id="role" name="designation" type="text" placeholder="role" value="{{ old('designation') }}" required>
+                            <label for="name">Password</label>
+                            <input class="form-control" id="password" name="password" type="text" placeholder="********" value="{{ old('password') }}" required>
                         </div>
                     </div>
                 </div>
